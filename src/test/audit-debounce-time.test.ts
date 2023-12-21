@@ -9,7 +9,7 @@ describe(auditDebounceTime, () => {
     const src = new Subject<number>()
     const cb = jest.fn()
 
-    src.pipe(auditDebounceTime(2, 10)).subscribe(cb)
+    src.pipe(auditDebounceTime(3, 10)).subscribe(cb)
 
     src.next(1)
     await sleep(1)
@@ -20,14 +20,10 @@ describe(auditDebounceTime, () => {
 
     expect(cb).not.toHaveBeenCalled()
 
-    await sleep(1)
-
-    expect(cb).toHaveBeenCalledTimes(1)
-    expect(cb).toHaveBeenCalledWith(3)
-
     await sleep(20)
 
     expect(cb).toHaveBeenCalledTimes(1)
+    expect(cb).toHaveBeenCalledWith(3)
   })
 
   test('it emits values after audit.', async () => {
@@ -51,12 +47,11 @@ describe(auditDebounceTime, () => {
     expect(cb).toHaveBeenCalledTimes(1)
   })
 
-  // TODO: make this test more robust
-  test.skip('it emits an audited and debounced value when appropriate.', async () => {
+  test('it emits an audited and debounced value when appropriate.', async () => {
     const src = new Subject<number>()
     const cb = jest.fn()
 
-    src.pipe(auditDebounceTime(2, 4)).subscribe(cb)
+    src.pipe(auditDebounceTime(3, 5)).subscribe(cb)
 
     src.next(1)
     await sleep(1)
@@ -67,10 +62,13 @@ describe(auditDebounceTime, () => {
     src.next(4)
     await sleep(1)
     src.next(5)
-    await sleep(3)
+    await sleep(1)
+    src.next(6)
+
+    await sleep(20)
 
     expect(cb).toHaveBeenCalledTimes(2)
     expect([3, 4]).toContain(cb.mock.calls[0][0])
-    expect(cb).toHaveBeenCalledWith(5)
+    expect(cb).toHaveBeenCalledWith(6)
   })
 })
