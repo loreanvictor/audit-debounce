@@ -27,8 +27,8 @@ import { auditDebounce } from 'audit-debounce'
 source$.pipe(
   // debounce for 100ms, but also emit the latest value after 1000ms
   auditDebounce(
-    () => timer(1000),
-    () => timer(100)
+    () => timer(100),
+    () => timer(1000)
   )
 )
 ```
