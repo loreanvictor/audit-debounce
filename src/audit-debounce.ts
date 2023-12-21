@@ -1,7 +1,7 @@
 import { ObservableInput, MonoTypeOperatorFunction, Subject, merge } from 'rxjs'
-import { audit, debounce, tap, filter, map, share } from 'rxjs/operators'
+import { audit, debounce, tap, filter, share } from 'rxjs/operators'
 
-import { CANCEL_SIGNAL } from './types'
+import { CANCEL_SIGNAL, isNotCancel } from './types'
 
 
 export function auditDebounce<T>(
@@ -15,17 +15,16 @@ export function auditDebounce<T>(
 
     const debounceIn$ = merge(sourceShared$, cancelDebounce$).pipe(
       debounce(debounceSelector),
+      filter(isNotCancel),
       tap(() => cancelAudit$.next(CANCEL_SIGNAL)),
     )
 
     const auditIn$ = merge(sourceShared$, cancelAudit$).pipe(
       audit(auditSelector),
+      filter(isNotCancel),
       tap(() => cancelDebounce$.next(CANCEL_SIGNAL)),
     )
 
-    return merge(debounceIn$, auditIn$).pipe(
-      filter((value) => value !== CANCEL_SIGNAL),
-      map(value => value as T),
-    )
+    return merge(debounceIn$, auditIn$)
   }
 }

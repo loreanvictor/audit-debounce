@@ -1,6 +1,6 @@
 {
   "name": "audit-debounce",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "rxjs operator to debounce and audit simultaenously",
   "main": "dist/commonjs/index.js",
   "module": "dist/es/index.js",
