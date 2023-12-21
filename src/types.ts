@@ -1,0 +1,1 @@
+export const CANCEL_SIGNAL = Symbol('AUDIT_DEBOUNCE_CANCEL_SYMBOL')
