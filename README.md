@@ -1,6 +1,6 @@
 <div align="right">
 
-[![npm package minimized gzipped size](https://img.shields.io/bundlejs/size/audit-debounce?style=flat-square&label=%20&color=black)](https://bundlejs.com/?q=audit-debounce)
+[![npm package minimized gzipped size](https://img.shields.io/bundlephobia/minzip/audit-debounce?style=flat-square&label=%20&color=black)](https://bundlejs.com/?q=audit-debounce)
 [![npm](https://img.shields.io/npm/v/audit-debounce?color=black&label=&style=flat-square)](https://www.npmjs.com/package/audit-debounce)
 [![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/loreanvictor/audit-debounce/coverage.yml?label=&style=flat-square)](https://github.com/loreanvictor/audit-debounce/actions/workflows/coverage.yml)
 
